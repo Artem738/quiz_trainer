@@ -8,7 +8,7 @@ web/
 
 # flutter_dotenv
 .env
-!.env_example
+!.env_exam
 
 
 # Except for the 'lib' directory and its contents
