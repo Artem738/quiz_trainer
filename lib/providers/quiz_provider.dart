@@ -74,4 +74,14 @@ class QuizProvider extends ChangeNotifier {
   }
 
   Map<int, int> get lastResults => _lastResults;
+
+  List<Question> searchQuestions(String query, String answerQuery) {
+    return _questions.where((question) {
+      final questionMatch = query.isNotEmpty && question.question.toLowerCase().contains(query.toLowerCase());
+      final answerMatch = answerQuery.isNotEmpty &&
+          question.answers.any((answer) => answer.text.toLowerCase().contains(answerQuery.toLowerCase()));
+      return questionMatch || answerMatch;
+    }).toList();
+  }
 }
+

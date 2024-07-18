@@ -53,14 +53,14 @@ class _QuestionCardState extends State<QuestionCard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Вопрос ${widget.question.id}',
+                  'Питання ${widget.question.id}',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  'Последний: $lastResult%',
+                  'Останній: $lastResult%',
                   style: TextStyle(
                     fontSize: 16,
                     color: lastResult == 100
@@ -105,7 +105,7 @@ class _QuestionCardState extends State<QuestionCard> {
             if (!_isAnswered)
               ElevatedButton(
                 onPressed: _selectedAnswers.isNotEmpty ? _submitAnswer : null,
-                child: Text('Ответить'),
+                child: Text('Відповісти'),
               ),
           ],
         ),

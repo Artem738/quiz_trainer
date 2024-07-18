@@ -4,6 +4,7 @@ import 'package:quiz_trainer/models/question_model.dart';
 import 'package:quiz_trainer/providers/quiz_provider.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:quiz_trainer/screens/question_card.dart';
+import 'package:quiz_trainer/screens/search_screen.dart';
 
 class QuizScreen extends StatefulWidget {
   @override
@@ -75,31 +76,39 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text('Quiz App'),
-          actions: [
-            PopupMenuButton<int>(
-              onSelected: _onPageChanged,
-              itemBuilder: (context) {
-                return List.generate(_totalPages, (index) {
-                  return PopupMenuItem<int>(
-                    value: index,
-                    child: Text('Страница ${index + 1}'),
-                  );
-                });
-              },
-              icon: Icon(Icons.more_vert),
-            ),
-          ],
+    appBar: AppBar(
+      title: Text('Quiz App'),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.search),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => SearchScreen()),
+            );
+          },
         ),
-        body: PagedListView<int, Question>(
-          pagingController: _pagingController,
-          builderDelegate: PagedChildBuilderDelegate<Question>(
-            itemBuilder: (context, question, index) => QuestionCard(
-              question: question,
-              questionNumber: index,
-            ),
-          ),
+        PopupMenuButton<int>(
+          onSelected: _onPageChanged,
+          itemBuilder: (context) {
+            return List.generate(_totalPages, (index) {
+              return PopupMenuItem<int>(
+                value: index,
+                child: Text('Сторінка ${index + 1}'),
+              );
+            });
+          },
+          icon: Icon(Icons.more_vert),
         ),
-      );
+      ],
+    ),
+    body: PagedListView<int, Question>(
+      pagingController: _pagingController,
+      builderDelegate: PagedChildBuilderDelegate<Question>(
+        itemBuilder: (context, question, index) => QuestionCard(
+          question: question,
+          questionNumber: index,
+        ),
+      ),
+    ),
+  );
 }
